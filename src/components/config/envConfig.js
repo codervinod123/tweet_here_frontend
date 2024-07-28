@@ -1,1 +1,1 @@
-export const RegisterURI=process.env.URI
+// export const RegisterURI=process.env.URI
