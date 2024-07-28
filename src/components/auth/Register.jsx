@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../commonComp/Button';
+import axios from "axios"
+import { RegisterURI } from '../config/envConfig';
 
 const Register = () => {
 
@@ -15,9 +17,21 @@ const Register = () => {
         setLoginData(prev => ({...prev, [name]: val}))
     }
 
-    const handleLogin=(e)=>{
+    const handleRegister=async(e)=>{
           e.preventDefault();
           console.log(loginData);
+         const user = await axios.post(RegisterURI,
+            {
+                email: loginData.email,
+                password: loginData.password,
+                name: loginData.name,
+            });
+        console.log(user);
+        setLoginData({
+            name:"",
+            email: "",
+            password: ""
+        })
     }
 
     return (
@@ -25,7 +39,7 @@ const Register = () => {
             <div className='h-[80%] lg:w-[40%] bg-slate-900 rounded-lg shadow-xl p-4 flex flex-col items-center'>
                 <h1 className='p-4 text-2xl text-white font-bold'>Register In to <span className='text-green-500 underline underline-offset-4'>Tweet Here</span></h1>
 
-                <form onSubmit={handleLogin} className='flex flex-col justify-center items-center gap-6 w-[40%] pt-12'>
+                <form onSubmit={handleRegister} className='flex flex-col justify-center items-center gap-6 w-[40%] pt-12'>
 
                   <input
                         type="text"

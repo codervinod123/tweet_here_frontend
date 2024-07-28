@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Button from '../commonComp/Button';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -9,14 +10,24 @@ const Login = () => {
     })
 
     const handleInputChange = (e) => {
-        const val=e.target.value;
-        const name=e.target.name;
-        setLoginData(prev => ({...prev, [name]: val}))
+        const val = e.target.value;
+        const name = e.target.name;
+        setLoginData(prev => ({ ...prev, [name]: val }))
     }
 
-    const handleLogin=(e)=>{
-          e.preventDefault();
-          console.log(loginData);
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        console.log(loginData);
+        const user = await axios.post("http://localhost:3001/api/v1/login",
+            {
+                email: loginData.email,
+                password: loginData.password
+            });
+        console.log(user);
+        setLoginData({
+            email: "",
+            password: ""
+        })
     }
 
     return (
@@ -42,8 +53,8 @@ const Login = () => {
                         name="password"
                         onChange={handleInputChange}
                     />
- 
-                    <Button type="submit" buttonName="Login"/>
+
+                    <Button type="submit" buttonName="Login" />
 
                 </form>
 
