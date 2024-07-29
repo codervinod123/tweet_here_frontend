@@ -1,6 +1,7 @@
 import React from 'react'
 import { BsEmojiSmile } from "react-icons/bs";
 import { CiImageOn } from "react-icons/ci";
+import { Link } from 'react-router-dom';
 import IMG from "../../src/assets/vinod.jpg";
 
 const Post = () => {
@@ -9,7 +10,7 @@ const Post = () => {
 
       <div className='border-b'>
         <div className='flex gap-x-8 px-8 pb-4'>
-          <img className='w-[40px] rounded-full' src={IMG} alt="" />
+          <Link to="/profile"><img className='w-[40px] rounded-full' src={IMG} alt="" /></Link>
           <input className='bg-black text-white text-[1rem] outline-none placeholder:text-gray-700  w-[100%]' placeholder='What id happening ?' type="text" />
         </div>
         <div className='flex gap-x-4 px-8 pb-8 ml-16'>

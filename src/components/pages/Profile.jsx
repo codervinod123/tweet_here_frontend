@@ -5,6 +5,7 @@ import { SlCalender } from "react-icons/sl";
 import TweetContent from './TweetContent';
 import Tweet from '../Tweet';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
 
@@ -26,7 +27,11 @@ const Profile = () => {
 
             <div className='flex justify-between py-3 px-8 backdrop-blur sticky top-0 z-10'>
                 <div className='flex items-center gap-x-6'>
-                    <IoIosArrowRoundBack size={"1.8rem"}/>
+                    <div className='cursor-pointer hover:bg-gray-900 rounded-full p-[3px] transition-all duration-500'>
+                      <Link to="/"> 
+                        <IoIosArrowRoundBack size={"1.3rem"}/>
+                      </Link>
+                    </div>
                     <div className='flex flex-col leading-[14px]'>
                       <span className='font-semibold'>@aryan_Yadav</span>
                       <span className='text-gray-600 text-sm'>238 Posts</span>
@@ -44,9 +49,12 @@ const Profile = () => {
                  <img className='rounded-full box-border h-[100px] w-[100px]' src={IMG} alt="" />
                </div>
 
-               <div className='pt-4 leading-[16px]'>
-                 <h1 className='font-bold'>Emma Watson</h1>
-                 <h1 className='text-thin text-gray-600'>@emmawatsonHarry</h1>
+               <div className='pt-4 leading-[16px] flex justify-between'>
+                <div>
+                  <h1 className='font-bold'>Emma Watson</h1>
+                  <h1 className='text-thin text-gray-600'>@emmawatsonHarry</h1>
+                </div>
+                 <button className='border px-2 py-[3px] rounded-full text-sm font-semibold hover:bg-gray-900 transition-all duration-500'>Edit Profile</button>
                </div>
 
                <div className='pt-3'>
