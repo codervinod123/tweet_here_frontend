@@ -42,7 +42,7 @@ const Login = () => {
     // },[])
 
 
-    return !authenticated ? <Dashboard /> : (
+    return authenticated ? <Dashboard /> : (
         <div className='h-[100vh] w-[100vw] bg-slate-700 flex justify-center items-center'>
             <div className='h-[80%] lg:w-[40%] bg-slate-900 rounded-lg shadow-xl p-4 flex flex-col items-center'>
                 <h1 className='p-4 text-2xl text-white font-bold'>Sign In to <span className='text-green-500 underline underline-offset-4'>Tweet Here</span></h1>
