@@ -20,7 +20,7 @@ const appRouter=createBrowserRouter([
     path:"/register",
     element:<Register/>,
     childrea:[]
- }
+  }
 ])
 
 const App = () => {

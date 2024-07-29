@@ -21,11 +21,13 @@ const Dashboard = () => {
   }
 
   return (
-    <div className='w-[100%] h-[100vh] bg-black grid grid-cols-5 text-white'>
-        
-         <Navigation/>
+    <div className='w-[100%] h-[100vh] bg-black grid lg:grid-cols-5 grid-cols-3 text-white'>
 
-        <div className='col-span-3 overflow-y-auto relative'>
+        <div className='hidden lg:grid'>
+           <Navigation/>
+        </div>
+
+        <div className='lg:col-span-3 col-span-3 overflow-y-auto relative'>
 
               <div className='flex justify-between py-3 px-8 backdrop-blur sticky top-0 z-10'>
                    <div>For You</div>
@@ -37,8 +39,9 @@ const Dashboard = () => {
                <Tweet tweet={tweet}/>
         </div>
 
-        <div className='text-white border-l'>kds</div>
-     
+        <div className='hidden lg:grid'>
+          <div className='text-white border-l'>kds</div>
+        </div>
        
     </div>
   )

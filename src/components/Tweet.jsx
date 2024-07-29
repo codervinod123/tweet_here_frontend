@@ -1,7 +1,11 @@
 import React from 'react'
 import { CiHeart } from "react-icons/ci";
 import { BsChat } from "react-icons/bs";
+
 import IMG from "../../src/assets/vinod.jpg";
+import IMG2 from "../../src/assets/img2.jpeg";
+import IMG3 from "../../src/assets/image1.png";
+import IMG4 from "../../src/assets/image2.png";
 
 const Tweet = ({ tweet }) => {
     console.log(tweet);
@@ -28,16 +32,18 @@ const Tweet = ({ tweet }) => {
                                                data.content
                                             }
                                         </p>
+                                        <div className='my-2 rounded-lg'>
+                                          <img className='rounded-lg' src={IMG2} alt="image" />
+                                        </div>
                                         <div className='flex gap-x-8 pt-4'>
-                                            <div className='flex items-start gap-x-1'>
+                                            <div className='flex items-start gap-x-1 cursor-pointer'>
                                                 <CiHeart size={"1.5rem"} />
                                                 <span>12</span>
                                             </div>
-                                            <div className='flex items-start gap-x-1'>
+                                            <div className='flex items-start gap-x-1 cursor-pointer'>
                                                 <BsChat className='font-thin' size={"1.3rem"} />
                                                 <span>12</span>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
