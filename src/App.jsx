@@ -6,6 +6,9 @@ import Register from './components/auth/Register'
 import Dashboard from './components/pages/Dashboard'
 import Profile from './components/pages/Profile'
 import TweetContent from './components/pages/TweetContent'
+import LandingPage from './components/pages/LandingPage'
+import FutureUpdate from './components/pages/FutureUpdate'
+import Tweet from './components/Tweet'
 
 
 const appRouter=createBrowserRouter([
@@ -21,8 +24,19 @@ const appRouter=createBrowserRouter([
       {
         path:"/profile",
         element:<Profile/>,
-        children:[]
-      }
+        children:[
+          {
+            path:"",
+            element:<Tweet/>,
+            children:[]       
+          },
+          {
+              path:"futureupdate",
+              element:<FutureUpdate/>,
+              children:[]       
+          }
+        ]
+      },
      ]
    },
    {
@@ -33,6 +47,11 @@ const appRouter=createBrowserRouter([
    {
     path:"/register",
     element:<Register/>,
+    children:[]
+   },
+   {
+    path:"/landing",
+    element:<LandingPage/>,
     children:[]
    }
 ])

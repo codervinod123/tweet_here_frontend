@@ -1,21 +1,34 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { CiHeart } from "react-icons/ci";
 import { BsChat } from "react-icons/bs";
+import axios from 'axios';
 
 import IMG from "../../src/assets/vinod.jpg";
 import IMG2 from "../../src/assets/img2.jpeg";
 import IMG3 from "../../src/assets/image1.png";
 import IMG4 from "../../src/assets/image2.png";
 
-const Tweet = ({ tweet }) => {
-    console.log(tweet);
+const Tweet = () => {
+
+
+    const [tweet,setTweet]=useState([]);
+
+    useEffect(()=>{
+        getTweets();
+    },[])
+  
+    const getTweets=async()=>{
+           const res=await axios.get("http://localhost:3001/api/v1/tweet");
+           setTweet(res.data.data);
+    }
+
+    
     return (
         <React.Fragment>
             {
                 tweet?.map((data) => {
-                    console.log(data);
                     return (
-                        <React.Fragment>
+                        <React.Fragment key={data._id}>
                             <div className='text-white border-b'>
 
                                 <div className='px-8 grid grid-cols-12 py-4'>

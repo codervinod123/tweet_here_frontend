@@ -20,14 +20,12 @@ const Register = () => {
 
     const handleRegister=async(e)=>{
           e.preventDefault();
-          console.log(loginData);
          const user = await axios.post("http://localhost:3001/api/v1/user",
             {
                 email: loginData.email,
                 password: loginData.password,
                 name: loginData.name,
             });
-        console.log(user);
         setLoginData({
             name:"",
             email: "",
