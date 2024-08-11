@@ -9,6 +9,7 @@ import TweetContent from './components/pages/TweetContent'
 import LandingPage from './components/pages/LandingPage'
 import FutureUpdate from './components/pages/FutureUpdate'
 import Tweet from './components/Tweet'
+import Trending from './components/pages/Trending'
 
 
 const appRouter=createBrowserRouter([
@@ -19,6 +20,11 @@ const appRouter=createBrowserRouter([
       {
         path:"/",
         element:<TweetContent/>,
+        children:[]
+      },
+      {
+        path:"/trending",
+        element:<Trending/>,
         children:[]
       },
       {

@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import Tweet from '../Tweet'
 import Post from '../Post'
+import CategoryNavigation from '../CategoryNavigation'
 
 const TweetContent = () => {
 
@@ -20,11 +21,8 @@ const TweetContent = () => {
        
             <div className='lg:col-span-3 col-span-3 overflow-y-auto relative'>
 
-                <div className='flex justify-between py-3 px-8 backdrop-blur sticky top-0 z-10'>
-                    <div>For You</div>
-                    <div>Following</div>
-                    <div>Trending</div>
-                </div>
+                <CategoryNavigation/>
+                
                 <Post />
                 <Tweet tweet={tweet} />
             </div>
