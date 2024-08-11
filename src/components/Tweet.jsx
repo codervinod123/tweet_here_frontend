@@ -2,25 +2,14 @@ import React,{useState,useEffect} from 'react'
 import { CiHeart } from "react-icons/ci";
 import { BsChat } from "react-icons/bs";
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 import IMG from "../../src/assets/vinod.jpg";
 import IMG2 from "../../src/assets/img2.jpeg";
 import IMG3 from "../../src/assets/image1.png";
 import IMG4 from "../../src/assets/image2.png";
 
-const Tweet = () => {
-
-
-    const [tweet,setTweet]=useState([]);
-
-    useEffect(()=>{
-        getTweets();
-    },[])
-  
-    const getTweets=async()=>{
-           const res=await axios.get("http://localhost:3001/api/v1/tweet");
-           setTweet(res.data.data);
-    }
+const Tweet = ({tweet}) => {
 
     
     return (
@@ -46,7 +35,7 @@ const Tweet = () => {
                                             }
                                         </p>
                                         <div className='my-2 rounded-lg'>
-                                          <img className='rounded-lg' src={IMG2} alt="image" />
+                                          <img className='rounded-lg' src={IMG4} alt="image" />
                                         </div>
                                         <div className='flex gap-x-8 pt-4'>
                                             <div className='flex items-start gap-x-1 cursor-pointer'>
