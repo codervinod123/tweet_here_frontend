@@ -16,7 +16,6 @@ const TweetContent = () => {
   const getTweets=async()=>{
          const res=await axios.get("http://localhost:3001/api/v1/tweet");
          setTweet(res.data.data);
-
   }
 
 

@@ -10,12 +10,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
+    const [authenticated, setAuthenticated] = useState(false);
     const [loginData, setLoginData] = useState({
         email: "",
         password: ""
     })
-    const [authenticated, setAuthenticated] = useState(false);
-
+   
     const handleInputChange = (e) => {
         const val = e.target.value;
         const name = e.target.name;
@@ -25,19 +25,21 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         if (isValidate(loginData)) {
+            console.log(loginData);
+            console.log("Form Validation PAssed the Reached here TO hit The API")
             const user = await axios.post("http://localhost:3001/api/v1/login",
                 {
                     email: loginData.email,
                     password: loginData.password
                 });
-            setLoginData({
-                email: "",
-                password: ""
-            })
-            if (user) {
-                localStorage.setItem("authenticated", true);
-                setAuthenticated(true);
-            }
+            // setLoginData({
+            //     email: "",
+            //     password: ""
+            // })
+            // if (user) {
+            //     localStorage.setItem("authenticated", true);
+            //     setAuthenticated(true);
+            // }
         }
 
     }
@@ -57,7 +59,7 @@ const Login = () => {
             return false;
         }
         else if (!data.password) {
-            toast.error("Please Enter the email id", {
+            toast.error("Please Enter Password", {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -69,6 +71,7 @@ const Login = () => {
             })
             return false;
         }
+        return true;
     }
 
         // useEffect(()=>{
@@ -124,7 +127,6 @@ const Login = () => {
 
 
                 </div>
-                <button onClick={isValidate}>Checking Toast</button>
                 <ToastContainer />
             </div>
         )

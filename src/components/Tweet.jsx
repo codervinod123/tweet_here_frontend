@@ -16,6 +16,9 @@ const Tweet = ({tweet}) => {
         <React.Fragment>
             {
                 tweet?.map((data) => {
+                   
+                    // console.log(data);
+                    
                     return (
                         <React.Fragment key={data._id}>
                             <div className='text-white border-b'>
@@ -35,7 +38,7 @@ const Tweet = ({tweet}) => {
                                             }
                                         </p>
                                         <div className='my-2 rounded-lg'>
-                                          <img className='rounded-lg' src={IMG4} alt="image" />
+                                          <img className='rounded-lg' src={data.media[0]} alt="image" />
                                         </div>
                                         <div className='flex gap-x-8 pt-4'>
                                             <div className='flex items-start gap-x-1 cursor-pointer'>
