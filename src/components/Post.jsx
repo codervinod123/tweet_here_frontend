@@ -4,45 +4,44 @@ import { CiImageOn } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import IMG from "../../src/assets/vinod.jpg";
 import axios from 'axios';
-import ImageUpload from './ImageUpload';
+
 
 const Post = () => {
 
+  const [image,setImage]=useState({ preview:'',data:'' })
+  const [content,setContent]=useState("");
 
-  const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [content, setContent] = useState("");
-
-
-  const handleChange = (e) => {
+  const handleContent = (e) => {
     setContent(e.target.value);
   }
 
-  const handleImageUpload = (event) => {     
-    const file = event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = (e) => {
-      setPreview(reader.result);
-    };
-    setImage(file);
+  const handleImageUpload = (e) => {     
+     const img = {
+       preview: URL.createObjectURL(e.target.files[0]),
+       data: e.target.files[0],
+    }
+    setImage(img)
   }
 
   const postSubmit = async () => {
     try {
-      const formData = new FormData();
-      formData.append("file", image);
-      formData.append("upload_preset", "upload_from_react_app");
-      formData.append("folder", "react_app_uploadation");
-      const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/prajapatiautomobiles/image/upload",
-        formData
-      );
-      console.log(response.data.secure_url);
-      setPreview(null);
-      setImage(null);
-    } catch (error) {
-      console.error(error);
+       const formData=new FormData();
+       formData.append('content',content);
+       formData.append('file',image.data);
+       await fetch(
+            'http://localhost:3001/api/v1/tweet',
+            {
+              method: 'POST',
+              body: formData
+            }
+       );
+
+       setImage({ preview:'',data:'' });
+       setContent("");
+
+    }
+     catch (error) {
+        console.error(error);
     }
   }
 
@@ -66,18 +65,18 @@ const Post = () => {
               type="text"
               value={content}
               name="content"
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleContent(e)}
             />
             <div className='my-2 rounded-lg'>
             </div>
             <div className='flex gap-x-8 pt-4'>
             <div>
               {
-                preview 
+                image.preview 
                 &&
                   <div className=''>
-                     <button onClick={()=>setPreview(null)} className='absolute right-16'>❌</button>
-                     <img className='rounded' src={preview} alt="previewImage" />
+                     <button onClick={ ()=>setImage({preview:'',data:''}) } className='absolute right-16'>❌</button>
+                     <img className='rounded' src={image.preview} alt="previewImage" />
                   </div> 
                
               }
@@ -90,7 +89,7 @@ const Post = () => {
         <div className='flex justify-between gap-x-4 px-8 pb-8 ml-16'>
 
          <div className='flex items-center gap-x-4 '>
-           <label for="file-input">
+           <label htmlFor="file-input">
               <CiImageOn className='text-blue-700 font-bold cursor-pointer'/>
            </label>
            <input
@@ -115,3 +114,52 @@ const Post = () => {
 }
 
 export default Post
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from 'react'
+
+
+// const  Post=()=> {
+//   const [image, setImage] = useState({ preview: '', data: '' })
+//   const [status, setStatus] = useState('')
+//   const handleSubmit = async (e) => {
+//     e.preventDefault()
+//     let formData = new FormData()
+//     formData.append('content', "constant content from vinod #side")
+//     formData.append('file', image.data)
+//     const response = await fetch('http://localhost:3001/api/v1/tweet', {
+//       method: 'POST',
+//       body: formData,
+//     })
+//     if (response) setStatus(response.statusText)
+//   }
+
+//   const handleFileChange = (e) => {
+//     const img = {
+//       preview: URL.createObjectURL(e.target.files[0]),
+//       data: e.target.files[0],
+//     }
+//     setImage(img)
+//   }
+
+
+// return (
+//   <div className='App border p-12'>
+//     <h1>Upload to server</h1>
+//     {image.preview && <img src={image.preview} width='100' height='100' />}
+//     <hr></hr>
+//     <form onSubmit={handleSubmit}>
+//       <input type='file' name='file' onChange={handleFileChange}></input>
+//       <button type='submit'>Submit</button>
+//     </form>
+//     {status && <h4>{status}</h4>}
+//   </div>
+//  )
+// }
+
+// export default Post;
