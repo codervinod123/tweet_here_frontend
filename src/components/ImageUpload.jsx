@@ -1,9 +1,9 @@
+import React from "react";
 import { FiImage } from "react-icons/fi";
 import { useRef, useState } from "react";
 import axios from "axios";
 
-export default function ImageUpload({upload}) {
-  
+export default function ImageUpload({ upload }) {
   const imagePicker = useRef(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -13,7 +13,7 @@ export default function ImageUpload({upload}) {
     const file = event.target.files[0];
     let reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = (e) => {
+    reader.onloadend = () => {
       setPreviewImage(reader.result);
     };
     setSelectedFile(file);
@@ -27,7 +27,7 @@ export default function ImageUpload({upload}) {
       formData.append("folder", "react_app_uploadation");
       const response = await axios.post(
         "https://api.cloudinary.com/v1_1/prajapatiautomobiles/image/upload",
-        formData
+        formData,
       );
       setUploadedURL(response.data.secure_url);
       setPreviewImage(null);
@@ -51,9 +51,10 @@ export default function ImageUpload({upload}) {
         />
       </div>
 
-    <button onClick={()=>upload(uploadedURL)}>
-        HEYYYYYYYYYYYYYYYYYYYYAAAAA<br/>
-    </button>
+      <button onClick={() => upload(uploadedURL)}>
+        HEYYYYYYYYYYYYYYYYYYYYAAAAA
+        <br />
+      </button>
 
       {uploadedURL && <div>url: {uploadedURL}</div>}
       {selectedFile && <button onClick={() => uploadImage()}>Upload</button>}

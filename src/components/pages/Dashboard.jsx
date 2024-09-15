@@ -6,7 +6,6 @@
 
 // import axios from "axios";
 
-
 // const Dashboard = () => {
 
 //   const [tweet,setTweet]=useState([]);
@@ -41,19 +40,17 @@
 //         <div className='hidden lg:grid'>
 //           <div className='text-white border-l'>kds</div>
 //         </div>
-       
+
 //     </div>
 //   )
 // }
 
 // export default Dashboard
 
-import React from 'react'
+import React from "react";
 
 const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
+  return <div>Dashboard</div>;
+};
 
-export default Dashboard
+export default Dashboard;
