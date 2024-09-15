@@ -3,13 +3,11 @@ import { CiHeart } from "react-icons/ci";
 import { BsChat } from "react-icons/bs";
 
 import IMG from "../../src/assets/vinod.jpg";
-
+ // eslint-disable-next-line
 const Tweet = ({ tweet }) => {
   return (
     <React.Fragment>
       {tweet?.map((data) => {
-        // console.log(data);
-
         return (
           <React.Fragment key={data._id}>
             <div className="text-white border-b">

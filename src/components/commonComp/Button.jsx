@@ -1,6 +1,7 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 
+// eslint-disable-next-line
 const Button = ({ buttonName }) => {
   return (
     <div>

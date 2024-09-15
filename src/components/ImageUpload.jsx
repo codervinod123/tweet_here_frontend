@@ -2,7 +2,7 @@ import React from "react";
 import { FiImage } from "react-icons/fi";
 import { useRef, useState } from "react";
 import axios from "axios";
-
+ // eslint-disable-next-line
 export default function ImageUpload({ upload }) {
   const imagePicker = useRef(null);
   const [previewImage, setPreviewImage] = useState(null);

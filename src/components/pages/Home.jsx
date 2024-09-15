@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import axios from "axios";
 
 const Home = () => {
+   // eslint-disable-next-line
   const [tweet, setTweet] = useState([]);
 
   useEffect(() => {

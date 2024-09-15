@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+  // eslint-disable-next-line
   const [authenticated, setAuthenticated] = useState(false);
   const [loginData, setLoginData] = useState({
     email: "",
