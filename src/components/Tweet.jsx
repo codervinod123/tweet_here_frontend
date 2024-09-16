@@ -3,7 +3,7 @@ import { CiHeart } from "react-icons/ci";
 import { BsChat } from "react-icons/bs";
 
 import IMG from "../../src/assets/vinod.jpg";
- // eslint-disable-next-line
+// eslint-disable-next-line
 const Tweet = ({ tweet }) => {
   return (
     <React.Fragment>

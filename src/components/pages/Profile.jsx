@@ -5,11 +5,15 @@ import { SlCalender } from "react-icons/sl";
 import { Link, Outlet } from "react-router-dom";
 import { IoIosClose } from "react-icons/io";
 import { BsUpload } from "react-icons/bs";
+import axios from "axios";
 
 const Profile = () => {
   const [active, setActive] = useState("Posts");
+  const [previewProfile, setPreviewProfile] = useState(null);
+  const [profilePic, setProfilePic] = useState(null);
 
   const dialogRef = useRef(null);
+
   const handleProfileEdit = () => {
     if (dialogRef.current) {
       dialogRef.current.showModal(); // Open the dialog
@@ -22,34 +26,77 @@ const Profile = () => {
     }
   };
 
+  const handleImage = (e) => {
+    const img = e.target.files[0];
+
+    setPreviewProfile(URL.createObjectURL(img));
+    setProfilePic(img);
+  };
+
+  const saveUpdate = async () => {
+    const formData = new FormData();
+    formData.append("file", profilePic);
+    // later on will replace with user clicked profile id
+    formData.append("id", "66e7c6c4a9cefe1b77477db6");
+    const response = await axios.post(
+      "http://localhost:3001/api/v1/updateprofile",
+      formData,
+    );
+    console.log("results", response);
+    setPreviewProfile(null);
+    setProfilePic(null);
+  };
 
   return (
     <div className="lg:col-span-3 col-span-3 overflow-y-auto relative">
-
       {/* dialog box testing */}
       <dialog ref={dialogRef}>
         <div className="bg-slate-900 flex flex-col items-center p-4 h-[300px] w-[300px]">
-
           <div className="flex w-full justify-between">
             <div className="flex items-center">
-              <IoIosClose onClick={closeDialog} className="font-bold cursor-pointer" size={"1.6rem"} color="white" />
-              <span className="text-sm text-white font-semibold">Edit Profile</span>
+              <IoIosClose
+                onClick={closeDialog}
+                className="font-bold cursor-pointer"
+                size={"1.6rem"}
+                color="white"
+              />
+              <button className="text-sm text-white font-semibold">
+                Edit Profile
+              </button>
             </div>
             <div>
-              <span className="bg-white rounded-full px-3 flex justify-center font-semibold">Save</span>
+              <span
+                onClick={saveUpdate}
+                className="bg-white rounded-full px-3 flex justify-center font-semibold"
+              >
+                Save
+              </span>
             </div>
           </div>
 
           <label htmlFor="updateImg">
             <div className="bg-white p-6 rounded-full mt-8 cursor-pointer">
-              <BsUpload size={"5rem"} color="black" />
+              {previewProfile ? (
+                <div className="h-[5rem] w-[5rem] rounded-full">
+                  <img
+                    className="h-[7rem] w-[7rem]"
+                    src={previewProfile}
+                    alt="profilepic"
+                  />
+                </div>
+              ) : (
+                <BsUpload size={"5rem"} color="black" />
+              )}
             </div>
           </label>
-          <input className="hidden" id="updateImg" type="file" />
-
+          <input
+            onChange={(e) => handleImage(e)}
+            className="hidden"
+            id="updateImg"
+            type="file"
+          />
         </div>
       </dialog>
-
 
       <div className="flex justify-between py-1 px-8 backdrop-blur sticky top-0 z-10">
         <div className="flex items-center gap-x-6">
@@ -68,9 +115,6 @@ const Profile = () => {
       <div className="h-[200px] bg-gray-700 relative"></div>
 
       <div className="box-border relative top-[-50px] px-8 text-white">
-
-
-
         <div className="box-border border-2 border-slate-700 h-[100px] w-[100px] rounded-full">
           <img
             className="rounded-full box-border h-[100px] w-[100px]"
@@ -84,7 +128,10 @@ const Profile = () => {
             <h1 className="font-bold">Emma Watson</h1>
             <h1 className="text-thin text-gray-600">@emmawatsonHarry</h1>
           </div>
-          <button onClick={handleProfileEdit} className="border px-2 py-[3px] rounded-full text-sm font-semibold hover:bg-gray-900 transition-all duration-500">
+          <button
+            onClick={handleProfileEdit}
+            className="border px-2 py-[3px] rounded-full text-sm font-semibold hover:bg-gray-900 transition-all duration-500"
+          >
             Edit Profile
           </button>
         </div>

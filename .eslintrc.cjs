@@ -1,4 +1,4 @@
- // eslint-disable-next-line
+// eslint-disable-next-line
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
