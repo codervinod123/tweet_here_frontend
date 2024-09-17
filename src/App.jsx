@@ -9,6 +9,7 @@ import LandingPage from "./components/pages/LandingPage";
 import FutureUpdate from "./components/pages/FutureUpdate";
 import Tweet from "./components/Tweet";
 import Trending from "./components/pages/Trending";
+import TrendingPosts from "./components/pages/TrendingPosts";
 
 const appRouter = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ const appRouter = createBrowserRouter([
       {
         path: "/trending",
         element: <Trending />,
+        children: [],
+      },
+      {
+        path: "/trendingpost",
+        element: <TrendingPosts />,
         children: [],
       },
       {

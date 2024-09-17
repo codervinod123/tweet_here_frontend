@@ -17,7 +17,7 @@ const Trending = () => {
   };
 
   const handleTrendNavigate = (data) => {
-    navigate("/", { state: { trends: data } });
+    navigate("/trendingpost", { state: { trends: data.tweets } });
   };
 
   return (
