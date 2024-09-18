@@ -11,47 +11,64 @@ const Profile = () => {
   const [active, setActive] = useState("Posts");
   const [previewProfile, setPreviewProfile] = useState(null);
   const [profilePic, setProfilePic] = useState(null);
+  const [formData,setFormData]=useState({
+    name:"",
+    bio:"",
+    location:""
+  })
 
   const dialogRef = useRef(null);
-
   const handleProfileEdit = () => {
     if (dialogRef.current) {
       dialogRef.current.showModal(); // Open the dialog
     }
   };
-
   const closeDialog = () => {
     if (dialogRef.current) {
       dialogRef.current.close(); // Close the dialog
     }
   };
 
-  const handleImage = (e) => {
-    const img = e.target.files[0];
-
-    setPreviewProfile(URL.createObjectURL(img));
-    setProfilePic(img);
+  const handleDataChange = (e) => {
+    if(e.target.files){
+      const img = e.target.files[0];
+      setProfilePic(img);
+      setPreviewProfile(URL.createObjectURL(img));
+    }
+    const {value,name}=e.target;
+    setFormData({...formData,[name]:value});
   };
 
   const saveUpdate = async () => {
-    const formData = new FormData();
-    formData.append("file", profilePic);
+    console.log("Captured data=>",formData)
+
+    const formdata = new FormData();
+    formdata.append("file", profilePic);
+    formdata.append("name", formData.name);
+    formdata.append("bio", formData.bio);
+    formdata.append("location", formData.location);
+
     // later on will replace with user clicked profile id
-    formData.append("id", "66e7c6c4a9cefe1b77477db6");
+    formdata.append("id", "66eaac98f356e58116dd84fb");
     const response = await axios.post(
       "http://localhost:3001/api/v1/updateprofile",
-      formData,
+      formdata,
     );
     console.log("results", response);
     setPreviewProfile(null);
-    setProfilePic(null);
+    setFormData({
+      profilePic:null,
+      name:"",
+      bio:"",
+      location:""
+    })
   };
 
   return (
     <div className="lg:col-span-3 col-span-3 overflow-y-auto relative">
       {/* dialog box testing */}
-      <dialog ref={dialogRef}>
-        <div className="bg-slate-900 flex flex-col items-center p-4 h-[300px] w-[300px]">
+      <dialog className="rounded-lg border border-pink-500" ref={dialogRef}>
+        <div className="bg-slate-900 flex flex-col gap-4 p-4 w-[300px]">
           <div className="flex w-full justify-between">
             <div className="flex items-center">
               <IoIosClose
@@ -74,27 +91,72 @@ const Profile = () => {
             </div>
           </div>
 
-          <label htmlFor="updateImg">
-            <div className="bg-white p-6 rounded-full mt-8 cursor-pointer">
-              {previewProfile ? (
+          <label className="flex" htmlFor="updateImg">
+            <div className="bg-white border border-pink-500 p-6 rounded-full mt-8 cursor-pointer">
+              {previewProfile ? ( 
                 <div className="h-[5rem] w-[5rem] rounded-full">
                   <img
-                    className="h-[7rem] w-[7rem]"
+                    className="h-[4rem] w-[4rem]"
                     src={previewProfile}
                     alt="profilepic"
                   />
                 </div>
               ) : (
-                <BsUpload size={"5rem"} color="black" />
+                <BsUpload size={"2rem"} color="black" />
               )}
             </div>
           </label>
           <input
-            onChange={(e) => handleImage(e)}
+            onChange={(e) => handleDataChange(e)}
+            name="profilePic"
             className="hidden"
             id="updateImg"
             type="file"
           />
+
+          <div className="flex flex-col">
+            <label className="text-white text-sm font-light pb-[2px]">Name</label>
+            <input
+              onChange={(e) => handleDataChange(e)}
+              type="text"
+              placeholder="Name"
+              className="px-2 py-[4px] rounded text-sm font-light text-gray-300 bg-slate-900 border outline-none "
+              value={formData.name}
+              name="name"
+            />
+          </div>
+
+
+
+          <div className="flex flex-col">
+            <label className="text-white text-sm font-light pb-[2px]">Bio</label>
+            <input
+              onChange={(e) => handleDataChange(e)}
+              type="text"
+              placeholder="Bio"
+              className="px-2 py-[4px] rounded text-sm font-light text-gray-300 bg-slate-900 border outline-none "
+              value={formData.bio}
+              name="bio"
+              // onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="text-white text-sm font-light pb-[2px]">Location</label>
+            <input
+              onChange={(e) => handleDataChange(e)}
+              type="text"
+              placeholder="Location"
+              className="px-2 py-[4px] rounded text-sm font-light text-gray-300 bg-slate-900 border outline-none "
+              value={formData.location}
+              name="location"
+              // onChange={handleInputChange}
+            />
+          </div>
+
+
+        
+
         </div>
       </dialog>
 
