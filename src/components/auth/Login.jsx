@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../commonComp/Button";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
+import { Link,useNavigate } from "react-router-dom";
+
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const Login = () => {
+
+  const navigate=useNavigate();
   // eslint-disable-next-line
   const [authenticated, setAuthenticated] = useState(false);
   const [loginData, setLoginData] = useState({
@@ -24,20 +27,21 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (isValidate(loginData)) {
-      console.log(loginData);
-      console.log("Form Validation PAssed the Reached here TO hit The API");
-      await axios.post("http://localhost:3001/api/v1/login", {
+      const response=await axios.post("http://localhost:3001/api/v1/login", {
         email: loginData.email,
         password: loginData.password,
       });
-      // setLoginData({
-      //     email: "",
-      //     password: ""
-      // })
-      // if (user) {
-      //     localStorage.setItem("authenticated", true);
-      //     setAuthenticated(true);
-      // }
+      setLoginData({
+          email: "",
+          password: ""
+      })
+      console.log("Resp on Front",response.data.token);
+      if (response.data.token) {
+          localStorage.setItem("token", response.data.token);
+          navigate("/home");
+      }else{
+        console.log(response);
+      }
     }
   };
 
@@ -70,14 +74,14 @@ const Login = () => {
     return true;
   };
 
-  // useEffect(()=>{
-  //     const isLogin=localStorage.getItem("authenticated");
-  //     setAuthenticated(isLogin);
-  // },[])
+  useEffect(()=>{
+      const isLogin=localStorage.getItem("token");
+      if(isLogin){
+        navigate("/home");
+      }
+  },[])
 
-  return authenticated ? (
-    <Dashboard />
-  ) : (
+  return( 
     <div className="h-[100vh] w-[100vw] bg-slate-700 flex justify-center items-center">
       <div className="h-[80%] lg:w-[40%] bg-slate-900 rounded-lg shadow-xl p-4 flex flex-col items-center">
         <h1 className="p-4 text-2xl text-white font-bold">
@@ -127,7 +131,7 @@ const Login = () => {
       </div>
       <ToastContainer />
     </div>
-  );
+  )
 };
 
 export default Login;

@@ -11,11 +11,11 @@ const Profile = () => {
   const [active, setActive] = useState("Posts");
   const [previewProfile, setPreviewProfile] = useState(null);
   const [profilePic, setProfilePic] = useState(null);
-  const [formData,setFormData]=useState({
-    name:"",
-    bio:"",
-    location:""
-  })
+  const [formData, setFormData] = useState({
+    name: "",
+    bio: "",
+    location: "",
+  });
 
   const dialogRef = useRef(null);
   const handleProfileEdit = () => {
@@ -30,17 +30,17 @@ const Profile = () => {
   };
 
   const handleDataChange = (e) => {
-    if(e.target.files){
+    if (e.target.files) {
       const img = e.target.files[0];
       setProfilePic(img);
       setPreviewProfile(URL.createObjectURL(img));
     }
-    const {value,name}=e.target;
-    setFormData({...formData,[name]:value});
+    const { value, name } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const saveUpdate = async () => {
-    console.log("Captured data=>",formData)
+    console.log("Captured data=>", formData);
 
     const formdata = new FormData();
     formdata.append("file", profilePic);
@@ -57,11 +57,11 @@ const Profile = () => {
     console.log("results", response);
     setPreviewProfile(null);
     setFormData({
-      profilePic:null,
-      name:"",
-      bio:"",
-      location:""
-    })
+      profilePic: null,
+      name: "",
+      bio: "",
+      location: "",
+    });
   };
 
   return (
@@ -93,7 +93,7 @@ const Profile = () => {
 
           <label className="flex" htmlFor="updateImg">
             <div className="bg-white border border-pink-500 p-6 rounded-full mt-8 cursor-pointer">
-              {previewProfile ? ( 
+              {previewProfile ? (
                 <div className="h-[5rem] w-[5rem] rounded-full">
                   <img
                     className="h-[4rem] w-[4rem]"
@@ -115,7 +115,9 @@ const Profile = () => {
           />
 
           <div className="flex flex-col">
-            <label className="text-white text-sm font-light pb-[2px]">Name</label>
+            <label className="text-white text-sm font-light pb-[2px]">
+              Name
+            </label>
             <input
               onChange={(e) => handleDataChange(e)}
               type="text"
@@ -126,10 +128,10 @@ const Profile = () => {
             />
           </div>
 
-
-
           <div className="flex flex-col">
-            <label className="text-white text-sm font-light pb-[2px]">Bio</label>
+            <label className="text-white text-sm font-light pb-[2px]">
+              Bio
+            </label>
             <input
               onChange={(e) => handleDataChange(e)}
               type="text"
@@ -142,7 +144,9 @@ const Profile = () => {
           </div>
 
           <div className="flex flex-col">
-            <label className="text-white text-sm font-light pb-[2px]">Location</label>
+            <label className="text-white text-sm font-light pb-[2px]">
+              Location
+            </label>
             <input
               onChange={(e) => handleDataChange(e)}
               type="text"
@@ -153,17 +157,13 @@ const Profile = () => {
               // onChange={handleInputChange}
             />
           </div>
-
-
-        
-
         </div>
       </dialog>
 
       <div className="flex justify-between py-1 px-8 backdrop-blur sticky top-0 z-10">
         <div className="flex items-center gap-x-6">
           <div className="cursor-pointer hover:bg-gray-900 rounded-full p-[3px] transition-all duration-500">
-            <Link to="/">
+            <Link to="/home">
               <IoIosArrowRoundBack size={"1.3rem"} />
             </Link>
           </div>

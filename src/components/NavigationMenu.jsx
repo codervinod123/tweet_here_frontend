@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const Navigation = () => {
   return (
     <div className="p-4 flex flex-col gap-y-1  border-r">
-      <Link to="/">
+      <Link to="/home">
         <div className="flex gap-x-4 items-center px-4 py-1 rounded-full hover:bg-gray-800 text-[1.2rem] cursor-pointer">
           <span>
             <IoHomeOutline />

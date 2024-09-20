@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const CategoryNavigation = () => {
   return (
     <div className="flex justify-between py-3 px-8 backdrop-blur sticky top-0 z-50">
-      <Link to="/">
+      <Link to="/home">
         <div>For You</div>
       </Link>
 
-      <Link to="/">
+      <Link to="/home">
         <div>Following</div>
       </Link>
 

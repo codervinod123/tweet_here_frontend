@@ -19,7 +19,6 @@ const TweetContent = () => {
   return (
     <div className="lg:col-span-3 col-span-3 overflow-y-auto relative">
       <CategoryNavigation />
-
       <Post />
       <Tweet tweet={tweet} />
     </div>

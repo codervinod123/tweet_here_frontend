@@ -13,26 +13,31 @@ import TrendingPosts from "./components/pages/TrendingPosts";
 
 const appRouter = createBrowserRouter([
   {
+    path: "",
+    element: <Login />,
+    children: [],
+  },
+  {
     path: "/",
     element: <Home />,
     children: [
       {
-        path: "/",
+        path: "/home",
         element: <TweetContent />,
         children: [],
       },
       {
-        path: "/trending",
+        path: "trending",
         element: <Trending />,
         children: [],
       },
       {
-        path: "/trendingpost",
+        path: "trendingpost",
         element: <TrendingPosts />,
         children: [],
       },
       {
-        path: "/profile",
+        path: "profile",
         element: <Profile />,
         children: [
           {
@@ -48,11 +53,6 @@ const appRouter = createBrowserRouter([
         ],
       },
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-    children: [],
   },
   {
     path: "/register",

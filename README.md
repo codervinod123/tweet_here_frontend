@@ -23,10 +23,6 @@
  ┗ 📜server.js          Helpful for hoisting service
 ```
 
-
-
-
-
 ## Starting Local Development
 
 [Fork repository from](https://github.com/codervinod123/tweet_here_frontend.git)
@@ -35,7 +31,6 @@
 
 Install all the packages using the following command:
 
-
 ```shell
 npm install
 ```
@@ -43,4 +38,3 @@ npm install
 #### Confirm correct configuration setup
 
 This command should be successful, before moving to development.
-

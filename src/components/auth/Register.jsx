@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Button from "../commonComp/Button";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate=useNavigate();
   const [loginData, setLoginData] = useState({
     name: "",
     email: "",
@@ -29,6 +30,13 @@ const Register = () => {
       password: "",
     });
   };
+
+  useEffect(()=>{
+    const isLogin=localStorage.getItem("token");
+    if(isLogin){
+      navigate("/home");
+    }
+},[])
 
   return (
     <div className="h-[100vh] w-[100vw] bg-slate-700 flex justify-center items-center">
@@ -89,7 +97,7 @@ const Register = () => {
         <p className="pt-4 text-gray-300">
           Already Have an Account ?
           <span className="text-blue-500">
-            <Link to="/login">Sign In</Link>
+            <Link to="/">Sign In</Link>
           </span>
         </p>
       </div>

@@ -21,9 +21,7 @@ const Home = () => {
       <div className="hidden lg:grid">
         <Navigation />
       </div>
-
       <Outlet />
-
       <div className="hidden lg:grid">
         <div className="text-white border-l">kds</div>
       </div>
