@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import IMG from "../../../src/assets/harmayni.png";
 import { SlCalender } from "react-icons/sl";
@@ -8,6 +8,7 @@ import { BsUpload } from "react-icons/bs";
 import axios from "axios";
 
 const Profile = () => {
+ 
   const [active, setActive] = useState("Posts");
   const [previewProfile, setPreviewProfile] = useState(null);
   const [profilePic, setProfilePic] = useState(null);
@@ -16,6 +17,18 @@ const Profile = () => {
     bio: "",
     location: "",
   });
+
+  const [user,setUser]=useState(null);
+  
+  useEffect(()=>{
+     async function getUserData(){
+         const userId="66ed190a4647523d2b9a9a8f";
+         const response=await axios.get(`http://localhost:3001/api/v1/user?userId=${userId}`);
+         console.log(response.data.data);
+         setUser(response.data.data);
+     }
+     getUserData();
+  },[])
 
   const dialogRef = useRef(null);
   const handleProfileEdit = () => {
@@ -49,7 +62,7 @@ const Profile = () => {
     formdata.append("location", formData.location);
 
     // later on will replace with user clicked profile id
-    formdata.append("id", "66eaac98f356e58116dd84fb");
+    formdata.append("id", "66ed18c14647523d2b9a9a89");
     const response = await axios.post(
       "http://localhost:3001/api/v1/updateprofile",
       formdata,
@@ -64,8 +77,9 @@ const Profile = () => {
     });
   };
 
-  return (
+  return !user ? <h1>User is not loaded still</h1> : (
     <div className="lg:col-span-3 col-span-3 overflow-y-auto relative">
+     
       {/* dialog box testing */}
       <dialog className="rounded-lg border border-pink-500" ref={dialogRef}>
         <div className="bg-slate-900 flex flex-col gap-4 p-4 w-[300px]">
@@ -168,7 +182,7 @@ const Profile = () => {
             </Link>
           </div>
           <div className="flex flex-col leading-[18px]">
-            <span className="font-semibold">@aryan_Yadav</span>
+            <span className="font-semibold">{user.name}</span>
             <span className="text-gray-600 text-sm">238 Posts</span>
           </div>
         </div>
@@ -180,15 +194,15 @@ const Profile = () => {
         <div className="box-border border-2 border-slate-700 h-[100px] w-[100px] rounded-full">
           <img
             className="rounded-full box-border h-[100px] w-[100px]"
-            src={IMG}
+            src={user.profilePic}
             alt=""
           />
         </div>
 
         <div className="pt-3 leading-[16px] flex justify-between">
           <div>
-            <h1 className="font-bold">Emma Watson</h1>
-            <h1 className="text-thin text-gray-600">@emmawatsonHarry</h1>
+            <h1 className="font-bold">{user.name}</h1>
+            <h1 className="text-thin text-gray-600">{user.name}</h1>
           </div>
           <button
             onClick={handleProfileEdit}
@@ -199,8 +213,8 @@ const Profile = () => {
         </div>
 
         <div className="pt-2">
-          <h1 className="text-[13px]">Actoress, Model, Harry Porter</h1>
-          <h1 className="text-[13px]">Love from India ✅</h1>
+          <h1 className="text-[13px]">{user.bio}</h1>
+          <h1 className="text-[13px]">{user.location}</h1>
         </div>
 
         <div className="pt-2 flex items-center gap-x-2">

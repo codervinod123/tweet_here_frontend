@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../NavigationMenu";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Home = () => {
+  const navigate=useNavigate();
   // eslint-disable-next-line
   const [tweet, setTweet] = useState([]);
 
   useEffect(() => {
+      const isLogin=localStorage.getItem("token");
+      if(!isLogin){
+        navigate("/");
+      }
     getTweets();
   }, []);
 
